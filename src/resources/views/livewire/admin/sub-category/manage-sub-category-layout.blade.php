@@ -1,6 +1,6 @@
-<div x-data="modalCategory">
+<div x-data="modalSubCategory">
     <div>
-        <p class=" text-4xl font-bold text-center p-2">Lista de Categorias</p>
+        <p class=" text-4xl font-bold text-center p-2">Lista de SubCategorias</p>
     </div>
     <div x-show="open" x-cloak>
         <x-generics.modal>
@@ -17,23 +17,23 @@
                 <x-generics.forms.detalles :detail="$detalle" />
             </div>
             <div x-show="action=='element'">
-                <livewire:admin.category.new-category-form />
+                <livewire:admin.sub-category.new-sub-category-form />
             </div>
         </x-generics.modal>
     </div>
     <div class="flex flex-col">
         <div class="flex p-3 gap-5">
-            <x-generics.input wire:model.live.debounce.500ms="Search" placeholder="Buscar categoria por Nombre o Descripción" class="bg-stone-100"></x-generics.input>
-            <x-generics.button wire:click="newCategory">
+            <x-generics.input wire:model.live.debounce.500ms="Search" placeholder="Buscar subcategoria por Nombre o Descripción" class="bg-stone-100"></x-generics.input>
+            <x-generics.button wire:click="newSubCategory">
                 Agregar
             </x-generics.button>
         </div>
         <div class=" bg-gray-100 p-5 rounded-2xl">
-            <livewire:admin.category.category-table />
+            <livewire:admin.sub-category.sub-category-table />
         </div>
     </div>
     <script>
-        function modalCategory(){
+        function modalSubCategory(){
             return {
                 open: @entangle('open').live,
                 action: @entangle('action').live,

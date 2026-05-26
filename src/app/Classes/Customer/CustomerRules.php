@@ -1,24 +1,20 @@
 <?php
 
-namespace App\Classes\Auth;
+namespace App\Classes\Customer;
 
-class RegisterRules
+class CustomerRules
 {
     /**
      * Create a new class instance.
      */
-    public function __construct()
-    {
-        //
-    }
-
     public static function rules()
     {
         return [
             'first_name' => 'required|string|max:50',
             'last_name' => 'required|string|max:50',
-            'email' => 'required|unique:users,email|email|max:50',
-            'password' => 'required|min:8|max:30',
+            'email' => 'required|email|max:60',
+            'phone_number' => 'required|string|max:20',
+            'user_id' => 'required|integer|min:1',
         ];
     }
 }

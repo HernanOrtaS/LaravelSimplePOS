@@ -1,0 +1,21 @@
+<?php
+
+namespace App\Classes\Customer;
+use App\Models\Customer;
+
+class PatchCustomer
+{
+    /**
+     * Create a new class instance.
+     */
+    public function patchRegister (array $data, int $id)
+    {
+        return Customer::where('id', $id)->update([
+            'first_name' => $data['first_name'],
+            'last_name' => $data['last_name'],
+            'email' => $data['email'],
+            'phone_number' => $data['phone_number'],
+            'user_id' => $data['user_id'],
+        ]);
+    }
+}

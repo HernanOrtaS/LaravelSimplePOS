@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Classes\Category;
+namespace App\Classes\SubCategory;
 
-class CategoryRules
+class SubCategoryRules
 {
     /**
      * Create a new class instance.
@@ -12,7 +12,8 @@ class CategoryRules
         return [
             'name' => 'required|string|max:50',
             'description' => 'required|string|max:250',
-            'user_id' => 'required|integer|min:1'
+            'user_id' => 'required|integer|min:1',
+            'category_id' => 'required|integer|min:1'
         ];
     }
 }

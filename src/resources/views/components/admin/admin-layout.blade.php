@@ -11,6 +11,22 @@
                         @svg('heroicon-s-table-cells', 'h-6 text-green-800')
                         <p>Categorias</p>
                     </x-generics.side-bar-elements.link>
+                    <x-generics.side-bar-elements.link change="green" href="{{ route('admin.manageSubCategory') }}" active="admin.manageSubCategory">
+                        @svg('heroicon-s-table-cells', 'h-6 text-green-800')
+                        <p>SubCategorias</p>
+                    </x-generics.side-bar-elements.link>
+                    <x-generics.side-bar-elements.link change="green" href="{{ route('admin.manageProduct') }}" active="admin.manageProduct">
+                        @svg('heroicon-s-cube', 'h-6 text-green-800')
+                        <p>Productos</p>
+                    </x-generics.side-bar-elements.link>
+                    <x-generics.side-bar-elements.link change="green" href="{{ route('admin.manageCustomer') }}" active="admin.manageCustomer">
+                        @svg('heroicon-s-user', 'h-6 text-green-800')
+                        <p>Clientes</p>
+                    </x-generics.side-bar-elements.link>
+                    <x-generics.side-bar-elements.link change="green" href="{{ route('admin.manageProduct') }}" active="admin.manageProduct">
+                        @svg('heroicon-s-banknotes', 'h-6 text-green-800')
+                        <p>Ventas</p>
+                    </x-generics.side-bar-elements.link>
                 </div>
                 <div class="flex self-center p-5">
                     <livewire:admin.logout.logout />

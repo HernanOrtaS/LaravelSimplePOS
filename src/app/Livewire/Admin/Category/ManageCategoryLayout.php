@@ -53,7 +53,7 @@ class ManageCategoryLayout extends Component
         $this->updateList();
     }
 
-    public function nuevaCategoria()
+    public function newCategory()
     {
         $this->open = true;
         $this->action = 'element';
