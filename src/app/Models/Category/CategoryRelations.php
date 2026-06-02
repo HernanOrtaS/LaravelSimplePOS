@@ -7,11 +7,11 @@ use App\Models\User;
 
 trait CategoryRelations
 {
-    public function user () {
+    public function user() {
         return $this->belongsTo(User::class);
     }
 
-    public function subCategory () {
+    public function subCategory() {
         return $this->hasMany(SubCategory::class);
     }
 }

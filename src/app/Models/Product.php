@@ -6,7 +6,7 @@ use App\Models\Product\ProductRelations;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 
 use Illuminate\Database\Eloquent\Model;
-#[Fillable(['name', 'description', 'user_id', 'sub_category_id',])]
+#[Fillable(['name', 'description', 'current_price', 'user_id', 'sub_category_id',])]
 class Product extends Model
 {
     use ProductAttributes;

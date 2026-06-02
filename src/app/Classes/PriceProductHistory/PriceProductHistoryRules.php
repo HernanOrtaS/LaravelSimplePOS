@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Classes\Product;
+namespace App\Classes\PriceProductHistory;
 
-class ProductRules
+class PriceProductHistoryRules
 {
     /**
      * Create a new class instance.
@@ -10,11 +10,9 @@ class ProductRules
     public static function rules()
     {
         return [
-            'name' => 'required|string|max:50',
-            'description' => 'required|string|max:250',
             'current_price' => 'required|decimal:2|min:1|max:100000',
             'user_id' => 'required|integer|min:1',
-            'sub_category_id' => 'required|integer|min:1'
+            'product_id' => 'required|integer|min:1',
         ];
     }
 }

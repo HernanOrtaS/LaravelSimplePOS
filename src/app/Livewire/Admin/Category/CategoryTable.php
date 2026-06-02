@@ -4,36 +4,34 @@ namespace App\Livewire\Admin\Category;
 
 use App\Models\Category;
 use Livewire\Component;
+use Livewire\WithPagination;
 
 class CategoryTable extends Component
 {
+    use WithPagination;
     protected $listeners = [
         'MCL_updateList' => 'getCategories',
         'MCL_searchInList' => 'getSearch',
         ];
-    public $categories = [];
     public $search;
-
-    public function mount()
-    {
-        $this->getCategories();
-    }
 
     public function getCategories()
     {
+        $categories = null;
         if ($this->search != '') {
-            $this->categories = Category::where('name', 'like', "%$this->search%")
+            $categories = Category::where('name', 'like', "%$this->search%")
                 ->orWhere('description', 'like', "%$this->search%")
-                ->get();
+                ->paginate(5);
         } else{
-            $this->categories = Category::all();
+            $categories = Category::paginate(5);
         }
+        return $categories;
     }
 
     public function getSearch(string $search = '')
     {
+        $this->resetPage();
         $this->search = $search;
-        $this->getCategories();
     }
 
     public function edit($id)
@@ -53,6 +51,8 @@ class CategoryTable extends Component
 
     public function render()
     {
-        return view('livewire.admin.category.category-table');
+        return view('livewire.admin.category.category-table', [
+            'categories' => $this->getCategories()
+        ]);
     }
 }

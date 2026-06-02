@@ -7,7 +7,6 @@ use App\Classes\Customer\GetCustomer;
 use App\Classes\Customer\PatchCustomer;
 use App\Classes\Customer\RegisterCustomer;
 use Illuminate\Support\Facades\Auth;
-use App\Models\Customer;
 use Livewire\Component;
 
 class NewCustomerForm extends Component
@@ -19,14 +18,9 @@ class NewCustomerForm extends Component
     public int $customer_id = 0;
 
     protected $listeners = [
-        'MSCL_openEdit' => 'openEdit',
-        'MSCL_openNew' => 'openNew'
+        'MCuL_openEdit' => 'openEdit',
+        'MCuL_openNew' => 'openNew'
         ];
-
-    public function __construct()
-    {
-        $this->getCustomers();
-    }
 
     public function openEdit($id)
     {
@@ -75,11 +69,6 @@ class NewCustomerForm extends Component
     public function updateList()
     {
         $this->dispatch('NCuF_updateList');
-    }
-
-    public function getCustomers()
-    {
-        $this->customerList = Customer::select('first_name', 'last_name')->get();
     }
 
     public function render()

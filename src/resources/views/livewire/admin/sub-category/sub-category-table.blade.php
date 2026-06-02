@@ -54,4 +54,7 @@
             @endforelse
         </tbody>
     </table>
+    <div class="m-2">
+        {{ $subCategories->Links() }}
+    </div>
 </div>

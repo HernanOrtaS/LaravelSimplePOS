@@ -4,36 +4,34 @@ namespace App\Livewire\Admin\Customer;
 
 use App\Models\Customer;
 use Livewire\Component;
+use Livewire\WithPagination;
 
 class CustomerTable extends Component
 {
+    use WithPagination;
     protected $listeners = [
         'MCuL_updateList' => 'getCustomers',
         'MCuL_searchInList' => 'getSearch',
         ];
-    public $customers = [];
     public $search;
-
-    public function mount()
-    {
-        $this->getCustomers();
-    }
 
     public function getCustomers()
     {
+        $customers = null;
         if ($this->search != '') {
-            $this->customers = Customer::where('first_name', 'like', "%$this->search%")
+            $customers = Customer::where('first_name', 'like', "%$this->search%")
                 ->orWhere('last_name', 'like', "%$this->search%")
-                ->get();
+                ->paginate(5);
         } else{
-            $this->customers = Customer::all();
+            $customers = Customer::paginate(5);
         }
+        return $customers;
     }
 
     public function getSearch(string $search = '')
     {
+        $this->resetPage();
         $this->search = $search;
-        $this->getCustomers();
     }
 
     public function edit($id)
@@ -53,6 +51,8 @@ class CustomerTable extends Component
 
     public function render()
     {
-        return view('livewire.admin.customer.customer-table');
+        return view('livewire.admin.customer.customer-table', [
+            'customers' => $this->getCustomers()
+        ]);
     }
 }

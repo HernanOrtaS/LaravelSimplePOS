@@ -12,6 +12,10 @@
             <x-generics.input name="description" wire:model="description" placeholder="Ingresa la descripcion"/>
         </div>
         <div>
+            <label>Precio:</label>
+            <x-generics.number-input name="precio" wire:model="current_price" placeholder="Ingresa el precio"/>
+        </div>
+        <div>
             <label>Sub Categoria:</label>
             <select wire:model="sub_category_id" class="bg-gray-200 rounded-xl p-2">
                 <option value="0">-- Elige una subcategoria --</option>

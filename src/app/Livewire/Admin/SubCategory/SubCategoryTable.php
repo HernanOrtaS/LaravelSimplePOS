@@ -4,36 +4,35 @@ namespace App\Livewire\Admin\SubCategory;
 
 use App\Models\SubCategory;
 use Livewire\Component;
+use Livewire\WithPagination;
 
 class SubCategoryTable extends Component
 {
+    use WithPagination;
     protected $listeners = [
         'MSCL_updateList' => 'getSubCategories',
         'MSCL_searchInList' => 'getSearch',
         ];
-    public $subCategories = [];
     public $search;
-
-    public function mount()
-    {
-        $this->getSubCategories();
-    }
 
     public function getSubCategories()
     {
+        $subCategories = null;
         if ($this->search != '') {
-            $this->subCategories = SubCategory::where('name', 'like', "%$this->search%")
+            $subCategories = SubCategory::where('name', 'like', "%$this->search%")
                 ->orWhere('description', 'like', "%$this->search%")
-                ->get();
+                ->paginate(5);
         } else{
-            $this->subCategories = SubCategory::all();
+            $subCategories = SubCategory::paginate(5);
         }
+
+        return $subCategories;
     }
 
     public function getSearch(string $search = '')
     {
+        $this->resetPage();
         $this->search = $search;
-        $this->getSubCategories();
     }
 
     public function edit($id)
@@ -53,6 +52,8 @@ class SubCategoryTable extends Component
 
     public function render()
     {
-        return view('livewire.admin.sub-category.sub-category-table');
+        return view('livewire.admin.sub-category.sub-category-table', [
+            'subCategories' => $this->getSubCategories()
+        ]);
     }
 }

@@ -2,6 +2,8 @@
 
 namespace App\Livewire\Admin\Product;
 
+use App\Classes\PriceProductHistory\PriceProductHistoryRules;
+use App\Classes\PriceProductHistory\RegisterPriceProductHistory;
 use App\Classes\Product\ProductRules;
 use App\Classes\Product\GetProduct;
 use App\Classes\Product\PatchProduct;
@@ -12,7 +14,7 @@ use Livewire\Component;
 
 class NewProductForm extends Component
 {
-    public $name, $description, $user_id;
+    public $name, $description, $user_id, $product_id, $current_price;
     public int $editId = 0;
     public string $mode = '';
     public $subCategoryList;
@@ -36,6 +38,7 @@ class NewProductForm extends Component
         $data = $getProduct->getProduct($id);
         $this->name = $data['name'];
         $this->description = $data['description'];
+        $this->current_price = $data['current_price'];
         $this->sub_category_id = $data['sub_category_id'];
         $this->editId = $id;
         $this->user_id = Auth::id();
@@ -44,8 +47,16 @@ class NewProductForm extends Component
     public function save()
     {
         $validated = $this->validate(ProductRules::rules());
-        $newCategory = new RegisterProduct();
-        $newCategory->saveRegister($validated);
+        $newProduct = new RegisterProduct();
+        $productRegistered = $newProduct->saveRegister($validated);
+        
+        $this->product_id = $productRegistered['id'];
+
+        $priceValidated = $this->validate(PriceProductHistoryRules::rules());
+        $priceHistory = new RegisterPriceProductHistory();
+        
+        $priceHistory->saveRegister($priceValidated);
+
         $this->clean();
         $this->updateList();
     }
@@ -53,15 +64,23 @@ class NewProductForm extends Component
     public function patch()
     {
         $validated = $this->validate(ProductRules::rules());
-        $newCategory = new PatchProduct();
-        $newCategory->patchRegister($validated, $this->editId);
+        $newProduct = new PatchProduct();
+        $newProduct->patchRegister($validated, $this->editId);
+
+        $this->product_id = $this->editId;
+
+        $priceValidated = $this->validate(PriceProductHistoryRules::rules());
+        $priceHistory = new RegisterPriceProductHistory();
+        
+        $priceHistory->saveRegister($priceValidated);
+
         $this->clean();
         $this->updateList();
     }
 
     public function clean()
     {
-        $this->reset('name', 'description');
+        $this->reset('name', 'description', 'current_price');
     }
 
     public function openNew()

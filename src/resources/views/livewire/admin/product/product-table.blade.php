@@ -6,8 +6,8 @@
                 <th>ID</th>
                 <th>Nombre</th>
                 <th>Descripcion</th>
+                <th>Precio</th>
                 <th>Subcategoria padre</th>
-                <th>Usuario</th>
                 <th>Acciones</th>
             </tr>
         </thead>
@@ -18,10 +18,8 @@
                     <td>{{ $product->id }}</td>
                     <td>{{ $product->name }}</td>
                     <td>{{ $product->description }}</td>
-                    <td>{{ $product->sub_category->name }}</td>
-                    <td>
-                        {{ $product->user->first_name . ' ' . $product->user->last_name }}
-                    </td>
+                    <td>{{ $product->current_price }}</td>
+                    <td>{{ $product->subCategory->name }}</td>
                     <td class="py-1">
                         <div class="flex place-content-center gap-2">
                             <x-generics.button
@@ -54,4 +52,7 @@
             @endforelse
         </tbody>
     </table>
+    <div class="m-2">
+        {{ $products->Links() }}
+    </div>
 </div>

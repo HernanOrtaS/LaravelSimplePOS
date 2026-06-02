@@ -24,7 +24,7 @@
     <div class="flex flex-col">
         <div class="flex p-3 gap-5">
             <x-generics.input wire:model.live.debounce.500ms="Search" placeholder="Buscar subcategoria por Nombre o Descripción" class="bg-stone-100"></x-generics.input>
-            <x-generics.button wire:click="newCustomer">
+            <x-generics.button wire:click="newCustomer()">
                 Agregar
             </x-generics.button>
         </div>

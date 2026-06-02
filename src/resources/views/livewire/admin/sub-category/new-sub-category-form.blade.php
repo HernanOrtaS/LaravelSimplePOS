@@ -1,6 +1,6 @@
 <div x-data="categorySubMode()">
     <div class=" text-2xl text-center font-bold mb-5">
-        <p>Agregar nueva categoria</p>
+        <p>Agregar nueva subcategoria</p>
     </div>
     <form wire:submit.prevent="{{ $mode=='create' ? 'save()' : 'patch()' }}" class="w-full h-full grid grid-cols-1 gap-5">
         <div>

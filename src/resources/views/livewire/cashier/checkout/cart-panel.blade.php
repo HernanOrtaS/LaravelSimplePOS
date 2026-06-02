@@ -5,42 +5,37 @@
             <tr>
                 <th>ID</th>
                 <th>Nombre</th>
-                <th>Apellido</th>
-                <th>Email</th>
-                <th>Telefono</th>
-                <th>Agregado por</th>
-                <th>Acciones</th>
+                <th>Cantidad</th>
+                <th>Precio unitario</th>
+                <th>Precio total</th>
             </tr>
         </thead>
 
         <tbody>
-            @forelse($customers as $customer)
+            @forelse($products as $product)
                 <tr class="border-y-2 border-gray-500">
-                    <td>{{ $customer->id }}</td>
-                    <td>{{ $customer->first_name }}</td>
-                    <td>{{ $customer->last_name }}</td>
-                    <td>{{ $customer->email }}</td>
-                    <td>{{ $customer->phone_number }}</td>
-                    <td>
-                        {{ $customer->user->first_name . ' ' . $customer->user->last_name }}
-                    </td>
+                    <td>{{ $product->id }}</td>
+                    <td>{{ $product->name }}</td>
+                    <td>{{ $product->amount }}</td>
+                    <td>{{ $product->single_price }}</td>
+                    <td>{{ $product->final_price }}</td>
                     <td class="py-1">
                         <div class="flex place-content-center gap-2">
                             <x-generics.button
                                 change="blue"
-                                wire:click="detail({{ $customer->id }})">
+                                wire:click="detail({{ $product->id }})">
                                 Detalles
                             </x-generics.button>
 
                             <x-generics.button
                                 change="yellow"
-                                wire:click="edit({{ $customer->id }})">
+                                wire:click="edit({{ $product->id }})">
                                 Editar
                             </x-generics.button>
 
                             <x-generics.button
                                 change="red"
-                                wire:click="delete({{ $customer->id }})">
+                                wire:click="delete({{ $product->id }})">
                                 Borrar
                             </x-generics.button>
                         </div>
@@ -56,7 +51,7 @@
             @endforelse
         </tbody>
     </table>
-    <div class="m-2">
-        {{ $customers->Links() }}
+    <div>
+        <p>Total: {{ $total }}</p>
     </div>
 </div>
