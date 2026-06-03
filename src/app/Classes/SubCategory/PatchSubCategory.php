@@ -10,11 +10,14 @@ class PatchSubCategory
      */
     public function patchRegister (array $data, int $id)
     {
-        return SubCategory::where('id', $id)->update([
+        $subCategory = SubCategory::findOrFail($id);
+        $subCategory->update([
             'name' => $data['name'],
             'description' => $data['description'],
             'user_id' => $data['user_id'],
             'category_id' => $data['category_id'],
         ]);
+        
+        return $subCategory;
     }
 }

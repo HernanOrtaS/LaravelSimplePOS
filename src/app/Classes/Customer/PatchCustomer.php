@@ -10,12 +10,16 @@ class PatchCustomer
      */
     public function patchRegister (array $data, int $id)
     {
-        return Customer::where('id', $id)->update([
+        $customer = Customer::findOrFail($id);
+
+        $customer->update([
             'first_name' => $data['first_name'],
             'last_name' => $data['last_name'],
             'email' => $data['email'],
             'phone_number' => $data['phone_number'],
             'user_id' => $data['user_id'],
         ]);
+        
+        return $customer;
     }
 }

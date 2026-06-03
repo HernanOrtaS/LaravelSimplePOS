@@ -2,6 +2,7 @@
 
 namespace App\Models\Product;
 
+use App\Classes\Models\FormatPricesAttribute;
 use App\Classes\Models\ToLowerCaseAttribute;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 
@@ -15,5 +16,10 @@ trait ProductAttributes
     protected function description() : Attribute
     {
         return ToLowerCaseAttribute::lowerCase();
+    }
+
+    protected function currentPrice() : Attribute
+    {
+        return FormatPricesAttribute::decimal();
     }
 }

@@ -13,7 +13,7 @@
         </div>
         <div>
             <label>Precio:</label>
-            <x-generics.number-input name="precio" wire:model="current_price" placeholder="Ingresa el precio"/>
+            <x-generics.number-input name="current_price" wire:model="current_price" placeholder="Ingresa el precio"/>
         </div>
         <div>
             <label>Sub Categoria:</label>

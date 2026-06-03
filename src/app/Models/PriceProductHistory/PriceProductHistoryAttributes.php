@@ -2,18 +2,13 @@
 
 namespace App\Models\PriceProductHistory;
 
-use App\Classes\Models\ToLowerCaseAttribute;
+use App\Classes\Models\FormatPricesAttribute;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 
 trait PriceProductHistoryAttributes
 {
-    protected function name() : Attribute
+    protected function price() : Attribute
     {
-        return ToLowerCaseAttribute::lowerCase();
-    }
-
-    protected function description() : Attribute
-    {
-        return ToLowerCaseAttribute::lowerCase();
+        return FormatPricesAttribute::decimal();
     }
 }

@@ -26,6 +26,7 @@ class RegisterPriceProductHistory
 
     private function checkPrice($id, $newPrice)
     {
+        $newPrice = floor($newPrice * 100) / 100;
         $product = PriceProductHistory::where('product_id', '=', $id)->latest()->first() ?? ['price' => 0];
         return $product['price'] == $newPrice;
     }

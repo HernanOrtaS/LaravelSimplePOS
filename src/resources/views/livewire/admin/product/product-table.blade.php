@@ -18,7 +18,7 @@
                     <td>{{ $product->id }}</td>
                     <td>{{ $product->name }}</td>
                     <td>{{ $product->description }}</td>
-                    <td>{{ $product->current_price }}</td>
+                    <td>{{ number_format($product->current_price, 2) }}</td>
                     <td>{{ $product->subCategory->name }}</td>
                     <td class="py-1">
                         <div class="flex place-content-center gap-2">

@@ -10,10 +10,14 @@ class PatchCategory
      */
     public function patchRegister (array $data, int $id)
     {
-        return Category::where('id', $id)->update([
+        $category = Category::findOrFail($id);
+
+        $category->update([
             'name' => $data['name'],
             'description' => $data['description'],
             'user_id' => $data['user_id'],
         ]);
+
+        return $category;
     }
 }

@@ -10,7 +10,7 @@ class PriceProductHistoryRules
     public static function rules()
     {
         return [
-            'current_price' => 'required|decimal:2|min:1|max:100000',
+            'current_price' => 'required|numeric|min:1|max:999999.99',
             'user_id' => 'required|integer|min:1',
             'product_id' => 'required|integer|min:1',
         ];
